@@ -826,6 +826,10 @@ Rectangle {
             Connections {
                 target: backend
 
+                function onAuthorizationStatusChanged(authorized) {
+                    console.log("Authorization changed:", authorized)
+                }
+
                 function onLoginSucceeded(devices) {
                     errorLabel.text = ""
                     deviceDialog.devices = devices
