@@ -1091,42 +1091,40 @@ class BrainwavesBackend(QObject):
     
                 @Slot()
                 def neurosityLogout(self):
-                self.neurosity_processor.logout()
-                self.neurosity_authorized = "UNKNOWN"
-                self.authorizationStatusChanged.emit(self.neurosity_authorized)
-                self.neurosityStatusChanged.emit("Signed out")
+                    self.neurosity_processor.logout()
+                    self.neurosity_authorized = "UNKNOWN"
+                    self.authorizationStatusChanged.emit(self.neurosity_authorized)
+                    self.neurosityStatusChanged.emit("Signed out")
 
                 def _set_neurosity_authorization_status(self, status):
-                self.neurosity_authorized = status
-                self.authorizationStatusChanged.emit(status)
+                    self.neurosity_authorized = status
+                    self.authorizationStatusChanged.emit(status)
                 @Slot()
                 def checkNeurosityAuthorization(self):
-                if self.neurosity_processor is None:
-                self._set_neurosity_authorization_status("UNKNOWN")
-                return
+                    if self.neurosity_processor is None:
+                        self._set_neurosity_authorization_status("UNKNOWN")
+                        return
 
-                self._set_neurosity_authorization_status("LOADING")
+                        self._set_neurosity_authorization_status("LOADING")
 
-                if not self.neurosity_processor.is_logged_in():
-                self._set_neurosity_authorization_status("UNKNOWN")
-                return
+                    if not self.neurosity_processor.is_logged_in():
+                        self._set_neurosity_authorization_status("UNKNOWN")
+                        return
 
-                # Verify access with the service, not just the local login state.
-                self.neurosity_processor.get_devices()
-                self._set_neurosity_authorization_status("ACTIVE")
+                        # Verify access with the service, not just the local login state.
+                         self.neurosity_processor.get_devices()
+                         self._set_neurosity_authorization_status("ACTIVE")
          
-    @Slot(str)
-    def selectNeurosityDevice(self, device):
+                    @Slot(str)
+                    def selectNeurosityDevice(self, device):
 
-        state = self.neurosity_processor.select_device(device)
-        # print("backend" + state)
+                        state = self.neurosity_processor.select_device(device)
+                        # print("backend" + state)
 
-        if state == "online":
-            self.deviceConnected.emit()
-        else:
-            self.deviceOffline.emit(
-                "Device is offline. Please connect it in the Neurosity app."
-            )
+                         if state == "online":
+                            self.deviceConnected.emit()
+                        else:
+                            self.deviceOffline.emit("Device is offline. Please connect it in the Neurosity app.")
 
 
 if __name__ == "__main__":
