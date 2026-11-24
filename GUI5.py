@@ -1095,11 +1095,7 @@ class BrainwavesBackend(QObject):
         self.neurosity_authorized = "UNKNOWN"
         self.authorizationStatusChanged.emit(self.neurosity_authorized)
         self.neurosityStatusChanged.emit("Signed out")
-    
-    def _set_neurosity_authorization_status(self, status):
-    if status != self.neurosity_authorized:
-        self.neurosity_authorized = status
-        self.authorizationStatusChanged.emit(status)
+
 
 @Slot()
 def checkNeurosityAuthorization(self):
