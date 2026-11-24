@@ -1104,16 +1104,14 @@ class BrainwavesBackend(QObject):
                     if self.neurosity_processor is None:
                         self._set_neurosity_authorization_status("UNKNOWN")
                         return
-
-                        self._set_neurosity_authorization_status("LOADING")
-
+                    self._set_neurosity_authorization_status("LOADING")
                     if not self.neurosity_processor.is_logged_in():
                         self._set_neurosity_authorization_status("UNKNOWN")
                         return
 
-                        # Verify access with the service, not just the local login state.
-                         self.neurosity_processor.get_devices()
-                         self._set_neurosity_authorization_status("ACTIVE")
+                    # Verify access with the service, not just the local login state.
+                    self.neurosity_processor.get_devices()
+                    self._set_neurosity_authorization_status("ACTIVE")
          
                     @Slot(str)
                     def selectNeurosityDevice(self, device):
