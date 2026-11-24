@@ -1110,8 +1110,8 @@ class BrainwavesBackend(QObject):
             return
 
             # Verify access with the service, not just the local login state.
-            self.neurosity_processor.get_devices()
-            self._set_neurosity_authorization_status("ACTIVE")
+        self.neurosity_processor.get_devices()
+        self._set_neurosity_authorization_status("ACTIVE")
          
     @Slot(str)
     def selectNeurosityDevice(self, device):
